@@ -1,93 +1,77 @@
+/* full-premium visual styles */
 :root{
-  --bg1:#220023;
-  --bg2:#2a0037;
-  --accent1:#ff4aa1;
+  --bg1:#0b0010;
+  --bg2:#23001f;
+  --accent1:#ff2d8a;
   --accent2:#ff66b8;
-  --text:#ffffff;
-  --muted:#f0d7ff;
+  --white: #fff;
+  --muted: #ffdff5;
 }
 
+/* reset */
 *{box-sizing:border-box}
-html,body{height:100%;margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:linear-gradient(180deg,var(--bg2),#0f0010);color:var(--text);-webkit-font-smoothing:antialiased}
-.page{min-height:100%;display:flex;align-items:center;justify-content:center;padding:32px}
+html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg1),#120116);font-family:Inter,system-ui,Arial,sans-serif;color:var(--white)}
+.shell{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
 
-/* CARD */
+/* card fills screen on small devices */
 .card{
-  width:100%;
-  max-width:460px;                 /* mobile friendly but fills width on small screens */
-  min-height:86vh;
-  background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.18));
-  border-radius:28px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.6), inset 0 2px 20px rgba(255,0,120,0.03);
-  padding:36px 28px 40px;
-  position:relative;
-  overflow:hidden;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  text-align:center;
+  width:100%; max-width:520px; height:calc(100vh - 40px);
+  border-radius:28px; overflow:hidden; position:relative;
+  display:flex; flex-direction:column; align-items:center; padding:32px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.22));
+  box-shadow: 0 30px 80px rgba(0,0,0,0.6), inset 0 2px 30px rgba(255,50,150,0.02);
 }
 
-/* decorative floating blobs / plus effects */
-.bg-blobs{
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  background:
-    radial-gradient(300px 300px at 10% 15%, rgba(255,70,150,0.16), transparent 20%),
-    radial-gradient(250px 250px at 85% 80%, rgba(120,40,200,0.12), transparent 18%),
-    radial-gradient(120px 120px at 50% 5%, rgba(255,100,160,0.06), transparent 20%);
-  filter: blur(18px);
-  transform: scale(1.05);
-  z-index:1;
-}
-.card > *{position:relative; z-index:2}
+/* animated background scene */
+.scene{position:absolute; inset:0; z-index:1; pointer-events:none; overflow:hidden}
+.blob{position:absolute; border-radius:50%; filter:blur(36px); opacity:0.9; animation:float 8s ease-in-out infinite}
+.b1{width:520px;height:520px; left:-10%; top:-15%; background:radial-gradient(circle at 30% 30%, rgba(255,80,145,0.16), transparent 40%), linear-gradient(150deg, rgba(255,40,140,0.08), rgba(90,25,140,0.06))}
+.b2{width:420px;height:420px; right:-10%; bottom:-25%; background:radial-gradient(circle at 70% 70%, rgba(120,40,200,0.12), transparent 30%); animation-duration:10s}
+@keyframes float{ 0%{transform:translateY(0) rotate(0)} 50%{transform:translateY(-20px) rotate(5deg)} 100%{transform:translateY(0) rotate(0)} }
 
-/* profile */
-.profile-wrap{position:relative; margin-top:6px; margin-bottom:18px; display:flex;align-items:center;justify-content:center}
-.profile-img{
-  width:140px;height:140px;border-radius:50%;object-fit:cover;
-  border:10px solid rgba(255,255,255,0.04);
-  box-shadow: 0 12px 40px rgba(255,20,120,0.18), 0 6px 18px rgba(0,0,0,0.6);
-  transition:transform .4s cubic-bezier(.2,.9,.3,1), box-shadow .3s;
-}
-.profile-img:hover{transform:translateY(-6px) scale(1.03)}
-.profile-glow{position:absolute;width:220px;height:220px;border-radius:50%; background:conic-gradient(from 60deg, rgba(255,70,150,0.14), rgba(120,40,200,0.12), rgba(255,140,180,0.08)); filter:blur(28px); z-index:1; top:-40px}
-.check-badge{position:absolute;right:calc(50% - 24px); bottom:-6px; transform:translateX(60px); background:linear-gradient(180deg,var(--accent1),var(--accent2)); color:#fff; width:56px;height:56px;border-radius:50%; display:flex;align-items:center;justify-content:center;font-weight:700;box-shadow:0 8px 24px rgba(255,70,150,0.3); font-size:20px}
+/* sparkles (tiny moving dots) */
+.sparkles{position:absolute; inset:0; background-image: radial-gradient(circle at 10% 20%, rgba(255,255,255,0.06) 0 2px, transparent 2px),
+ radial-gradient(circle at 80% 60%, rgba(255,255,255,0.03) 0 2px, transparent 2px);
+ opacity:0.9; mix-blend-mode:screen; transform:translateZ(0)}
 
-/* Titles */
-.title{font-size:28px;letter-spacing:1px;margin:14px 0 6px;color:var(--accent2); text-shadow:0 8px 20px rgba(255,70,150,0.12)}
-.subtitle{font-size:16px;color:#ffd1f3;margin:0 0 18px;font-weight:700}
-.desc{max-width:86%;margin:0 auto 20px;color:var(--muted);line-height:1.45;font-size:15px}
+/* content above background */
+.card > *{position:relative; z-index:3}
 
-/* CTA big button with pop & glow */
-.cta{
-  display:inline-flex;align-items:center;gap:12px;
-  text-decoration:none;padding:18px 22px;border-radius:44px;
-  background:linear-gradient(90deg,var(--accent1),var(--accent2));
-  color:#fff;font-weight:800;font-size:16px;letter-spacing:0.6px;
-  box-shadow: 0 18px 40px rgba(255,70,150,0.28), 0 6px 14px rgba(0,0,0,0.45);
-  transform-origin:center; transition:transform .25s ease, box-shadow .25s ease;
-  width:100%; max-width:420px; justify-content:center;
-}
-.cta .cta-icon{font-size:20px; margin-left:-6px}
-.cta.pop{ transform:scale(1.03); box-shadow:0 26px 60px rgba(255,70,150,0.34) }
-.cta:active{transform:scale(.99)}
+/* profile area */
+.profile-wrap{margin-top:10px; position:relative; display:flex; align-items:center; justify-content:center}
+.glow-ring{position:absolute;width:260px;height:260px;border-radius:50%; background:conic-gradient(from 180deg,var(--accent1),var(--accent2)); filter:blur(30px); opacity:0.9; transform:scale(.92)}
+.profile-img{width:150px;height:150px;border-radius:50%; object-fit:cover; border:8px solid rgba(0,0,0,0.25); box-shadow:0 18px 60px rgba(255,50,150,0.18)}
+.tick{position:absolute; right:calc(50% - 18px); bottom:-8px; transform:translateX(60px); width:56px;height:56px;border-radius:50%; background:linear-gradient(180deg,var(--accent1),var(--accent2)); display:flex;align-items:center;justify-content:center;font-weight:800; box-shadow:0 16px 40px rgba(255,50,150,0.32)}
+
+/* titles */
+.title{margin:16px 0 6px; font-size:28px; color:var(--accent2); text-shadow:0 10px 30px rgba(255,40,140,0.12); letter-spacing:1px}
+.subtitle{font-size:15px; color:#ffd8f4; font-weight:700; margin:0 0 14px}
+.desc{max-width:86%; color:var(--muted); line-height:1.45; margin:0 0 16px; font-size:15px}
+
+/* CTA with powerful glow + pop */
+.cta{display:flex; align-items:center; gap:12px; justify-content:center; text-decoration:none; width:100%; max-width:420px; padding:18px 20px; border-radius:54px;
+  background:linear-gradient(90deg,var(--accent1),var(--accent2)); color:#fff; font-weight:800; font-size:18px; letter-spacing:.6px;
+  box-shadow:0 30px 80px rgba(255,50,150,0.28); transition:transform .25s ease, box-shadow .25s; transform-origin:center}
+.cta.pop{transform:scale(1.04); box-shadow:0 38px 110px rgba(255,60,160,0.36)}
 .cta:hover{transform:translateY(-6px) scale(1.02)}
 
-/* redirect text */
-.redirect{margin:14px 0 10px;color:#ffd7f3;font-weight:600;font-size:16px}
+/* small plane icon */
+.plane{font-size:20px}
 
-/* bottom footer row / ad pill */
-.footer-row{display:flex;align-items:center;gap:12px; margin-top:auto}
-.ad-label{background:rgba(0,0,0,0.4);padding:6px 8px;border-radius:8px;font-size:13px;color:#ffd1f3}
-.ad-pill{padding:8px 14px;background:linear-gradient(90deg,#fff,#ffdff2);border-radius:20px;color:#2b0a18;font-weight:700;text-decoration:none;font-size:14px;box-shadow:0 8px 20px rgba(0,0,0,0.25)}
+/* redirect text larger */
+.redirect{margin:18px 0 10px; font-weight:700; color:#ffd9f6; font-size:16px}
 
-/* responsive tweaks */
+/* bottom ad pill smaller but clear */
+.ad-row{margin-top:auto; display:flex; align-items:center; gap:10px; padding-top:12px}
+.ad-label{background:rgba(0,0,0,0.35); color:#ffdff6; padding:6px 8px; border-radius:8px; font-size:13px}
+.ad-link{display:inline-block; padding:8px 14px; border-radius:20px; background:linear-gradient(90deg,#fff,#ffeef8); color:#280016; font-weight:800; text-decoration:none; font-size:13px; box-shadow:0 10px 30px rgba(0,0,0,0.22)}
+
+/* responsive */
 @media(max-width:420px){
-  .card{padding:28px 20px 34px; border-radius:20px}
+  .card{padding:26px; border-radius:16px}
+  .profile-img{width:130px;height:130px}
+  .glow-ring{width:210px;height:210px}
   .title{font-size:22px}
-  .profile-img{width:120px;height:120px}
-  .cta{font-size:15px;padding:16px 18px}
+  .cta{font-size:16px;padding:16px}
   .redirect{font-size:15px}
-}
+  }
