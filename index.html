@@ -5,20 +5,18 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>ROCHIT SINGH TRADER — Premium Trading Signals</title>
 
-  <meta name="description" content="ROCHIT SINGH TRADER — Join our Telegram for premium trading signals, winning strategies and market analysis." />
   <link rel="icon" href="profile.jpg" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="page">
     <div class="card">
-      <div class="card-glow"></div>
+      <div class="bg-blobs" aria-hidden="true"></div>
 
       <div class="profile-wrap">
-        <div class="profile">
-          <img src="profile.jpg" alt="profile" class="profile-img" />
-          <div class="badge">✔</div>
-        </div>
+        <div class="profile-glow"></div>
+        <img src="profile.jpg" alt="profile" class="profile-img" />
+        <div class="check-badge">✓</div>
       </div>
 
       <h1 class="title">ROCHIT SINGH TRADER</h1>
@@ -28,46 +26,48 @@
         Join our exclusive Telegram channel for premium trading signals and maximize your profits!
       </p>
 
-      <a id="mainCta" class="cta" href="https://t.me/+cy4GSgQRyG4yMGRl" target="_blank" rel="noopener noreferrer">
+      <a id="mainBtn" class="cta" href="https://t.me/+cy4GSgQRyG4yMGRl" target="_blank" rel="noopener noreferrer">
         <span class="cta-icon">✈️</span>
         <span class="cta-text">JOIN TELEGRAM - ROCHIT SINGH TRADER</span>
       </a>
 
       <p class="redirect">Redirecting in <span id="countdown">10</span>s...</p>
 
-      <p class="footer">
-        Get daily trading signals, winning strategies, and expert market analysis to maximize your profits!
-      </p>
-
-      <div class="ad-row">
+      <div class="footer-row">
         <span class="ad-label">Ad by</span>
-        <a class="ad-btn" href="https://t.me/+C5U8i9MTu3llOTE1" target="_blank" rel="noopener noreferrer">
-          swasthik digital
-        </a>
+        <a class="ad-pill" href="https://t.me/+C5U8i9MTu3llOTE1" target="_blank" rel="noopener noreferrer">swasthik digital</a>
       </div>
     </div>
   </div>
 
-<script>
-  // Auto-redirect countdown
-  (function(){
-    const secondsStart = 10;
-    let s = secondsStart;
-    const el = document.getElementById('countdown');
-    const targetUrl = document.getElementById('mainCta').href;
+  <script>
+    // countdown + auto-redirect (10s)
+    (function(){
+      const main = 'https://t.me/+cy4GSgQRyG4yMGRl';
+      let t = 10;
+      const el = document.getElementById('countdown');
+      const btn = document.getElementById('mainBtn');
 
-    el.textContent = s;
-    const t = setInterval(() => {
-      s--;
-      if (s <= 0) {
-        clearInterval(t);
-        // open main CTA in same tab (you can change to _blank)
-        window.location.href = targetUrl;
-      } else {
-        el.textContent = s;
-      }
-    }, 1000);
-  })();
-</script>
+      // increment visual pop effect on load
+      setTimeout(()=> btn.classList.add('pop'), 300);
+
+      const iv = setInterval(() => {
+        t--;
+        el.textContent = t;
+        if (t <= 0) {
+          clearInterval(iv);
+          // Redirect (open same tab)
+          window.location.href = main;
+        }
+      }, 1000);
+
+      // also allow immediate click (button already links)
+      btn.addEventListener('click', function(e){
+        // open immediately in new tab because href has target="_blank"
+        // also navigate current tab:
+        window.location.href = main;
+      });
+    })();
+  </script>
 </body>
 </html>
