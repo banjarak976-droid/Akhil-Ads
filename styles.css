@@ -1,77 +1,102 @@
-/* full-premium visual styles */
 :root{
   --bg1:#0b0010;
-  --bg2:#23001f;
+  --bg2:#120116;
   --accent1:#ff2d8a;
   --accent2:#ff66b8;
-  --white: #fff;
-  --muted: #ffdff5;
+  --white:#fff;
+  --muted:#ffdff5;
 }
 
 /* reset */
-*{box-sizing:border-box}
-html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg1),#120116);font-family:Inter,system-ui,Arial,sans-serif;color:var(--white)}
-.shell{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:linear-gradient(180deg,var(--bg1),var(--bg2));font-family:Inter,system-ui,Arial,sans-serif;color:var(--white)}
+.shell{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:18px}
 
 /* card fills screen on small devices */
 .card{
-  width:100%; max-width:520px; height:calc(100vh - 40px);
-  border-radius:28px; overflow:hidden; position:relative;
-  display:flex; flex-direction:column; align-items:center; padding:32px;
+  width:100%; max-width:540px; height:calc(100vh - 36px);
+  border-radius:20px; overflow:hidden; position:relative;
+  display:flex; flex-direction:column; align-items:center; padding:34px 24px 22px;
   background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.22));
   box-shadow: 0 30px 80px rgba(0,0,0,0.6), inset 0 2px 30px rgba(255,50,150,0.02);
 }
 
-/* animated background scene */
+/* animated background scene (behind everything) */
 .scene{position:absolute; inset:0; z-index:1; pointer-events:none; overflow:hidden}
 .blob{position:absolute; border-radius:50%; filter:blur(36px); opacity:0.9; animation:float 8s ease-in-out infinite}
-.b1{width:520px;height:520px; left:-10%; top:-15%; background:radial-gradient(circle at 30% 30%, rgba(255,80,145,0.16), transparent 40%), linear-gradient(150deg, rgba(255,40,140,0.08), rgba(90,25,140,0.06))}
-.b2{width:420px;height:420px; right:-10%; bottom:-25%; background:radial-gradient(circle at 70% 70%, rgba(120,40,200,0.12), transparent 30%); animation-duration:10s}
-@keyframes float{ 0%{transform:translateY(0) rotate(0)} 50%{transform:translateY(-20px) rotate(5deg)} 100%{transform:translateY(0) rotate(0)} }
+.b1{width:520px;height:520px; left:-12%; top:-20%; background:radial-gradient(circle at 30% 30%, rgba(255,80,145,0.14), transparent 40%), linear-gradient(150deg, rgba(255,40,140,0.08), rgba(90,25,140,0.06))}
+.b2{width:420px;height:420px; right:-12%; bottom:-28%; background:radial-gradient(circle at 70% 70%, rgba(120,40,200,0.12), transparent 30%); animation-duration:10s}
+@keyframes float{ 0%{transform:translateY(0) rotate(0)} 50%{transform:translateY(-18px) rotate(4deg)} 100%{transform:translateY(0) rotate(0)} }
 
-/* sparkles (tiny moving dots) */
-.sparkles{position:absolute; inset:0; background-image: radial-gradient(circle at 10% 20%, rgba(255,255,255,0.06) 0 2px, transparent 2px),
- radial-gradient(circle at 80% 60%, rgba(255,255,255,0.03) 0 2px, transparent 2px);
- opacity:0.9; mix-blend-mode:screen; transform:translateZ(0)}
+/* tiny sparkles layer */
+.sparkles{position:absolute; inset:0; background-image:
+  radial-gradient(circle at 10% 20%, rgba(255,255,255,0.06) 0 2px, transparent 2px),
+  radial-gradient(circle at 80% 60%, rgba(255,255,255,0.03) 0 2px, transparent 2px);
+  opacity:0.85; mix-blend-mode:screen; z-index:1}
 
 /* content above background */
 .card > *{position:relative; z-index:3}
 
-/* profile area */
-.profile-wrap{margin-top:10px; position:relative; display:flex; align-items:center; justify-content:center}
-.glow-ring{position:absolute;width:260px;height:260px;border-radius:50%; background:conic-gradient(from 180deg,var(--accent1),var(--accent2)); filter:blur(30px); opacity:0.9; transform:scale(.92)}
-.profile-img{width:150px;height:150px;border-radius:50%; object-fit:cover; border:8px solid rgba(0,0,0,0.25); box-shadow:0 18px 60px rgba(255,50,150,0.18)}
-.tick{position:absolute; right:calc(50% - 18px); bottom:-8px; transform:translateX(60px); width:56px;height:56px;border-radius:50%; background:linear-gradient(180deg,var(--accent1),var(--accent2)); display:flex;align-items:center;justify-content:center;font-weight:800; box-shadow:0 16px 40px rgba(255,50,150,0.32)}
+/* PROFILE: ring behind image, image on top */
+.profile-wrap{margin-top:6px; position:relative; display:flex; align-items:center; justify-content:center; width:100%}
+/* glow ring placed behind and smaller so it doesn't cover face */
+.glow-ring{
+  position:absolute;
+  z-index:2; /* behind profile-img (which is z-index:4) */
+  width:210px;height:210px;border-radius:50%;
+  background:conic-gradient(from 180deg,var(--accent1),var(--accent2));
+  filter:blur(38px); opacity:0.85; transform:scale(0.98);
+  top:-10px;
+}
+/* profile image should be above glow and fully visible */
+.profile-img{
+  z-index:4; position:relative;
+  width:150px;height:150px;border-radius:50%; object-fit:cover;
+  border:6px solid rgba(0,0,0,0.25);
+  box-shadow:0 18px 60px rgba(255,50,150,0.18);
+  background: #111; /* fallback if image missing */
+}
 
-/* titles */
-.title{margin:16px 0 6px; font-size:28px; color:var(--accent2); text-shadow:0 10px 30px rgba(255,40,140,0.12); letter-spacing:1px}
-.subtitle{font-size:15px; color:#ffd8f4; font-weight:700; margin:0 0 14px}
-.desc{max-width:86%; color:var(--muted); line-height:1.45; margin:0 0 16px; font-size:15px}
+/* tick icon to side */
+.tick{
+  position:absolute; z-index:5;
+  right:calc(50% - 28px); bottom:-10px;
+  transform:translateX(62px);
+  width:56px;height:56px;border-radius:50%;
+  background:linear-gradient(180deg,var(--accent1),var(--accent2));
+  display:flex;align-items:center;justify-content:center;font-weight:800;
+  box-shadow:0 16px 40px rgba(255,50,150,0.32);
+  color:white;
+  font-size:22px;
+}
+
+/* headings */
+.title{margin:18px 0 6px; font-size:26px; color:var(--accent2); text-shadow:0 10px 30px rgba(255,40,140,0.12); letter-spacing:1px; text-align:center}
+.subtitle{font-size:14px; color:#ffd8f4; font-weight:800; margin:0 0 10px; text-align:center}
+.desc{max-width:88%; color:var(--muted); line-height:1.45; margin:0 0 18px; font-size:15px; text-align:center}
 
 /* CTA with powerful glow + pop */
-.cta{display:flex; align-items:center; gap:12px; justify-content:center; text-decoration:none; width:100%; max-width:420px; padding:18px 20px; border-radius:54px;
+.cta{display:flex; align-items:center; gap:12px; justify-content:center; text-decoration:none; width:92%; max-width:480px; padding:18px 22px; border-radius:54px;
   background:linear-gradient(90deg,var(--accent1),var(--accent2)); color:#fff; font-weight:800; font-size:18px; letter-spacing:.6px;
-  box-shadow:0 30px 80px rgba(255,50,150,0.28); transition:transform .25s ease, box-shadow .25s; transform-origin:center}
-.cta.pop{transform:scale(1.04); box-shadow:0 38px 110px rgba(255,60,160,0.36)}
+  box-shadow:0 30px 80px rgba(255,50,150,0.28); transition:transform .25s ease, box-shadow .25s; transform-origin:center; z-index:4}
+.cta.pop{transform:scale(1.04); box-shadow:0 44px 140px rgba(255,60,160,0.38)}
 .cta:hover{transform:translateY(-6px) scale(1.02)}
-
-/* small plane icon */
 .plane{font-size:20px}
 
-/* redirect text larger */
-.redirect{margin:18px 0 10px; font-weight:700; color:#ffd9f6; font-size:16px}
+/* redirect text slightly bigger and centered */
+.redirect{margin:16px 0 14px; font-weight:700; color:#ffd9f6; font-size:16px; text-align:center}
 
-/* bottom ad pill smaller but clear */
-.ad-row{margin-top:auto; display:flex; align-items:center; gap:10px; padding-top:12px}
+/* ad row */
+.ad-row{margin-top:auto; display:flex; align-items:center; gap:10px; padding-top:12px; justify-content:center; width:100%}
 .ad-label{background:rgba(0,0,0,0.35); color:#ffdff6; padding:6px 8px; border-radius:8px; font-size:13px}
 .ad-link{display:inline-block; padding:8px 14px; border-radius:20px; background:linear-gradient(90deg,#fff,#ffeef8); color:#280016; font-weight:800; text-decoration:none; font-size:13px; box-shadow:0 10px 30px rgba(0,0,0,0.22)}
 
-/* responsive */
+/* responsive small screen tweaks */
 @media(max-width:420px){
-  .card{padding:26px; border-radius:16px}
+  .card{padding:28px 18px 18px; border-radius:16px}
   .profile-img{width:130px;height:130px}
-  .glow-ring{width:210px;height:210px}
+  .glow-ring{width:180px;height:180px; top:-6px}
   .title{font-size:22px}
   .cta{font-size:16px;padding:16px}
   .redirect{font-size:15px}
-  }
+}
